@@ -1,0 +1,19 @@
+server:
+  port: 8070
+spring:
+  datasource:
+    master:
+      jdbc-url: jdbc:mysql://172.16.10.1:3306/demodb?autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+      # 读写账号
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+    slave:
+      jdbc-url: jdbc:mysql://172.16.10.2:3306/demodb?autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+      # 只读账号
+      username: wjy
+      password: jy123123
+      driver-class-name: com.mysql.jdbc.Driver
+logging:
+  level:
+    org.springframework.core.io.support: debug

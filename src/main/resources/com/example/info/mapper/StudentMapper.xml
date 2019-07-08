@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.info.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.example.info.model.Student" >
+    <id column="stno" property="stno" jdbcType="INTEGER" />
+    <result column="stname" property="stname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stno, stname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where stno = #{stno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where stno = #{stno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.info.model.Student" >
+    insert into student (stno, stname)
+    values (#{stno,jdbcType=INTEGER}, #{stname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.info.model.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stno != null" >
+        stno,
+      </if>
+      <if test="stname != null" >
+        stname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stno != null" >
+        #{stno,jdbcType=INTEGER},
+      </if>
+      <if test="stname != null" >
+        #{stname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.info.model.Student" >
+    update student
+    <set >
+      <if test="stname != null" >
+        stname = #{stname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stno = #{stno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.info.model.Student" >
+    update student
+    set stname = #{stname,jdbcType=VARCHAR}
+    where stno = #{stno,jdbcType=INTEGER}
+  </update>
+</mapper>
